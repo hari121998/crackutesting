@@ -16,15 +16,15 @@ get_header(); ?>
           <nav aria-label="breadcrumb">
     <ol class="breadcrumb p-0">
         <li class="breadcrumb-item"><a href="https://cracku.in/blog/" target="_blank">Home</a></li>
-        <li class="breadcrumb-item"><a href="https://cracku.in/blog/category/cat/">CAT</a></li>
+        <li class="breadcrumb-item"><a href= <?php $category = get_the_category()[0]->cat_name; echo 'https://cracku.in/blog/category/' .strtolower($category);?>> <?php $category = get_the_category()[0]->cat_name; echo $category;?> </a></li>
         <li class="breadcrumb-item active" aria-current="page"> 
-        <?php $category = get_the_category();
-$firstCategory = $category[0]->cat_name; echo $firstCategory;?>
+          <?php the_title();?>
         </li>
     </ol>
 </nav>
 <span class="badge badge-danger breadcrumb-item active">
-<a  href="https://cracku.in/blog/category/cat/" style="color:#fff;">CAT</a>  
+<a  href= <?php $category = get_the_category()[0]->cat_name; echo 'https://cracku.in/blog/category/' .strtolower($category);?> style="color:#fff;"> <?php $category = get_the_category();
+$firstCategory = $category[0]->cat_name; echo $firstCategory;?></a>  
 </span>
 <!-- <a href="https://cracku.in/blog/category/cat/" class="btn btn-raised btn-danger">CAT</a> -->
   

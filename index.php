@@ -4,38 +4,71 @@
 <link rel="stylesheet" href='https://cracku.in/static/external/yt-lazy/yt-lazy.551e71f7135b.css'>
 
 <div class="container">
+      <!-- <div class="row mb-2">
+          <div class="col-lg-12">
+              <div class="badge-line"style="width:30%;border-bottom: 2px solid #f44336;">
+                  <span class="badge badge-danger">CAT</span>
+              </div>
+          </div>
+      </div> -->
         <div class="row">
+          
           <div class="col-lg-8">
-          <?php
+          
+          
+    <?php
 
-$args = array( 'posts_per_page' => 3 ); 
-$the_query = new WP_Query( $args ); 
+        $page = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 
-if ( $the_query->have_posts() ) :
-    // Start the Loop
-    while ( $the_query->have_posts() ) : $the_query->the_post();?>
-   <article class="card wow fadeInLeft animation-delay-5 mb-4" style="visibility: visible; animation-name: fadeInLeft;">
+        $args = array(
+          'post-type' => 'post',
+          'posts_per_page' => 3,
+          'order' => 'ASC',
+          'paged' => $page,
+        );
+
+        $the_query = new WP_Query( $args );
+
+        // Loop Starts here
+
+        if ( $the_query->have_posts() ) :
+            while ( $the_query->have_posts() ) : $the_query->the_post();?>
+        <div class="badge-line"style="width:50%;border-bottom: 2px solid #f44336;">
+                  <span class="badge badge-danger"><?php $category = get_the_category();
+$firstCategory = $category[0]->cat_name; echo $firstCategory;?></span>
+        </div>
+        <article class="card wow  animation-delay-5 mb-4" style="visibility: visible;">
              <div class="card-body overflow-hidden overflow-hidden">
                 <div class="row">
-                  <div class="col-xl-5">
+                  <div class="col-xl-5" style="padding-left:15px;">
                     <?php the_post_thumbnail('medium');?>
                     <!-- <img src="" alt="" class="img-fluid mb-4"> -->
                   </div>
                   <!-- <div class="col-xl-2"></div> -->
-                  <div class="col-xl-7">
+                  <div class="col-xl-7" style="padding-left:30px;">
                     <h3 class="no-mt"><a href=<?php echo get_permalink();?> ><?php the_title();?></a></h3>
-                    <p class="mb-4"><?php $excerpt = get_the_excerpt(); 
+                    <p class="mb-4"><?php $excerpt = get_the_excerpt();
                     // the_excerpt();
-                    $excerpt = substr( $excerpt, 0, 160 ); 
+                    $excerpt = substr( $excerpt, 0, 160 );
                     $result = substr( $excerpt, 0, strrpos( $excerpt, ' ' ) );
                     echo $result;?></p>
                   </div>
                 </div>
-                <div class="row">
+                <div class="row" style="align-items:center;">
                   <div class="col-lg-8">
-                    <img src=<?php get_avatar_url($user->ID, ['size' => '51']);?> alt="...." class="rounded-circle mr-1"> by <a href="javascript:void(0)"><?php the_author();?></a> 
-                    <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-time mr-05 color-info"></i> <span class="color-medium-dark"><?php $publish_date = get_the_date('F j, Y');
-echo $publish_date;?></span></span>
+                    <!-- <img src="" alt="...." class="rounded-circle mr-1">  -->
+                    by <a href="javascript:void(0)"><?php the_author();?></a>
+                    <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-time mr-05 color-info"></i> <span class="color-medium-dark">
+                      <?php 
+                        $publish_date = get_the_date('F j, Y');
+                        echo $publish_date;
+                      ?>
+                        </span>
+                      </span>
+                      <span class="ml-4"><i class="zmdi zmdi-eye"></i>
+                          <?php gt_set_post_view(); ?>
+                          <?= gt_get_post_view(); ?>
+                      </span>  
                   </div>
                   <div class="col-lg-4 text-right">
                     <a href=<?php echo get_permalink();?> class="btn btn-primary btn-raised btn-block animate-icon">Read More <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
@@ -44,60 +77,42 @@ echo $publish_date;?></span></span>
               </div>
             </article>
 
-        
+
    <?php endwhile;
-else:
 
-    _e( 'Sorry, no posts matched your criteria.', 'textdomain' );
-endif; 
-
-wp_reset_postdata();
-
+$big = 999999999; // need an unlikely integer
+echo '<nav aria-label="Page navigation">';
+echo '<ul class="pagination pagination-plain">';
+echo paginate_links( array(
+	'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+	'format' => '?paged=%#%',
+	'current' => max( 1, get_query_var('paged') ),
+	'total' => $the_query->max_num_pages,
+  'show_all' => 'true',
+  'prev_text' => '<<',
+  'next_text'  => ">>",
+  'prev_next' => 'false',
+) );
+echo '</ul>';
+echo '</nav>';
+    wp_reset_postdata();
+endif;
 ?>
-         
-            
-            <nav aria-label="Page navigation">
-              <ul class="pagination pagination-plain">
-                <li class="page-item">
-                  <a class="page-link" href="javascript:void(0)" aria-label="Previous">
-                    <span aria-hidden="true">«</span>
-                  </a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
-                <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                <li class="page-item"><a class="page-link" href="javascript:void(0)">4</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="javascript:void(0)" aria-label="Next">
-                    <span aria-hidden="true">»</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+
+
+
+
+
           </div>
           <div class="col-lg-4">
-            <div class="card animated fadeInUp animation-delay-7">
-              <div class="ms-hero-bg-info ms-hero-img-mountain">
-                <h3 class="color-white index-1 text-center no-m pt-4"><?php the_author();?></h3>
-                <div class="color-medium index-1 text-center np-m"><?php the_author();?>@cracku.in</div>
-                <img src="https://agmstudio.io/themes/material-style/2.4.4/assets/img/demo/avatar1.jpg" alt="..." class="img-avatar-circle">
-              </div>
-              <div class="card-body overflow-hidden pt-4 text-center">
-                <h3 class="color-primary">About me</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur alter adipisicing elit. Facilis, natuse inse voluptates officia repudiandae beatae magni es magnam autem molestias.</p>
-                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-google"><i class="zmdi zmdi-google"></i></a>
-                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-facebook"><i class="zmdi zmdi-facebook"></i></a>
-                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-twitter"><i class="zmdi zmdi-twitter"></i></a>
-                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-instagram"><i class="zmdi zmdi-instagram"></i></a>
-              </div>
-            </div>
-            <div class="card card-primary animated fadeInUp animation-delay-7">
+            
+            <div class="card card-primary animated  animation-delay-7">
               <div class="card-header">
                 <h3 class="card-title"><i class="zmdi zmdi-apps"></i> Navigation</h3>
               </div>
               <div class="card-tabs">
                 <ul class="nav nav-tabs nav-tabs-transparent indicator-primary nav-tabs-full nav-tabs-4" role="tablist">
-                  <li class="nav-item"><a href="#favorite" aria-controls="favorite" role="tab" data-toggle="tab" class="nav-link withoutripple active"><i class="no-mr zmdi zmdi-star"></i></a></li>
+                  <li class="nav-item"><a href="#favorite" aria-controls="favorite" role="tab" data-toggle="tab" class="nav-link withoutripple"><i class="no-mr zmdi zmdi-star"></i></a></li>
                   <li class="nav-item"><a href="#categories" aria-controls="categories" role="tab" data-toggle="tab" class="nav-link withoutripple"><i class="no-mr zmdi zmdi-folder"></i></a></li>
                   <li class="nav-item"><a href="#archives" aria-controls="archives" role="tab" data-toggle="tab" class="nav-link withoutripple"><i class="no-mr zmdi zmdi-time"></i></a></li>
                   <li class="nav-item"><a href="#tags" aria-controls="tags" role="tab" data-toggle="tab" class="nav-link withoutripple"><i class="no-mr zmdi zmdi-tag-more"></i></a></li>
@@ -110,12 +125,23 @@ wp_reset_postdata();
                     <div class="ms-media-list">
                     <?php
 
-$args = array( 'posts_per_page' => 3 ); 
-$the_query = new WP_Query( $args ); 
+        // $page = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 
-if ( $the_query->have_posts() ) :
-    // Start the Loop
-    while ( $the_query->have_posts() ) : $the_query->the_post();?>
+        $args = array(
+          'post-type' => 'post',
+          'posts_per_page' => 5,
+          'order_by' => 'date',
+          'order' => 'DESC',
+          // 'paged' => $page,
+        );
+
+        $the_query = new WP_Query( $args );
+
+        // Loop Starts here
+
+        if ( $the_query->have_posts() ) :
+            while ( $the_query->have_posts() ) : $the_query->the_post();?>
+
                       <div class="media mb-2">
                         <div class="media-left m-auto">
                           <a href="<?php echo get_permalink();?>" class="mr-3 media-object-circle">

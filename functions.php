@@ -7,6 +7,9 @@ add_theme_support( 'menus' );
 add_theme_support('post-thumbnails');
 add_theme_support( 'title-tag' );
 
+// require get_template_directory() . '/inc/template-tags.php';
+
+
 
 function gt_get_post_view() {
     $count = get_post_meta( get_the_ID(), 'post_views_count', true );
@@ -32,4 +35,4 @@ function gt_posts_custom_column_views( $column ) {
 add_filter( 'manage_posts_columns', 'gt_posts_column_views' );
 add_action( 'manage_posts_custom_column', 'gt_posts_custom_column_views' );
 
-
+?>
