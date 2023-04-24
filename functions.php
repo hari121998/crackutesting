@@ -20,10 +20,10 @@ function return_class_name($name){
         $classname = '#720925';
     }
     else if ($name === "CMAT"){
-        $classname = '#257002';
+        $classname = '#1e73be';
     }
     else if($name==="TISSNET"){
-        $classname = '#7c6c17';
+        $classname = '#257002';
     }
     return $classname;
 }

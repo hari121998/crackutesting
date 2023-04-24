@@ -4,14 +4,454 @@
 <link rel="stylesheet" href='https://cracku.in/static/external/yt-lazy/yt-lazy.551e71f7135b.css'>
 
 <div class="container">
-      <!-- <div class="row mb-2">
-          <div class="col-lg-12">
-              <div class="badge-line"style="width:30%;border-bottom: 2px solid #f44336;">
-                  <span class="badge badge-danger">CAT</span>
-              </div>
-          </div>
-      </div> -->
-        <div class="row">
+  <div class="row mb-5">
+    <div class="col-lg-4">
+      <div class="badge-line mb-5"style="width:100%;border-bottom: 2px solid <?php echo return_class_name('CAT'); ?>;">
+        <span class="badge badge-danger" style = 'background-color:<?php echo return_class_name('CAT'); ?>;border-color:<?php echo return_class_name('CAT'); ?>;'><?php  echo 'CAT';?></span>
+      </div>
+   
+
+      <?php 
+      
+        $args = array(
+          'post-type'     => 'post',
+          'order'         => 'DESC',
+          'category_name' => 'CAT',
+        );
+        $the_query = new WP_Query( $args );
+        
+        if ( $the_query->have_posts() ):
+          while ( $the_query->have_posts() ) : $the_query->the_post();
+          $post = get_post();
+
+          if ( current_theme_supports( 'post-thumbnails' ) && has_post_thumbnail( $post->ID ) ) {
+                  
+              $page_bg_image     = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
+              $page_bg_image_url = $page_bg_image[0]; // This returns just the URL of the image.
+
+          } else {
+              $page_bg_image_url = get_background_image();
+          }
+      ?>
+      <style >
+        .main-thumbnail-con{
+          display:flex;
+          flex-direction:column;
+          justify-content:flex-end;
+          color:#fff;
+          background-blend-mode: multiply;
+          background-color: rgba(0, 0, 0, 0.1);
+          position:relative;
+        }
+        .main-thumbnail-con h4{
+          font-family: 'Roboto', sans-serif;
+          font-weight:700;
+          font-size:17px;
+          z-index:9;
+          margin:1px 0;
+          word-wrap:break-word;
+        }
+        .main-thumbnail-author{
+          font-family: 'Open Sans', arial, sans-serif;
+          font-size: 13px;
+          font-weight:bold;
+        }
+        .main-thumbnail-date{
+          color: #aaa;
+          font-family: 'Open Sans', arial, sans-serif;
+          font-size: 11px;
+          line-height: 1;
+          font-weight:bold;
+        }
+        .main-thumbnail-desc-con{
+          background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+          position:absolute;
+          width:100%;
+          bottom:0;
+          z-index:9;
+          padding:10px 20px;
+        }
+
+
+      </style>
+      <a href = <?php echo get_permalink();?> title="<?php echo the_title()," [Latest Update]";?>">
+      <div class="main-thumbnail-con mb-2" style="height:20vh;background-image:url('<?php echo $page_bg_image_url; ?>');background-size:cover;">
+        <div class="main-thumbnail-desc-con">
+          <h4><?php echo the_title();?> <span>[Latest Update]</span></h4>
+          <span class="main-thumbnail-author"> <?php  the_author();?></span>
+          <span> - </span>
+          <span class="main-thumbnail-date"><?php $publish_date = get_the_date('F j, Y');echo $publish_date;?></span>
+        </div>    
+      </div>
+      </a>
+      
+     
+     <?php break; endwhile;?>
+      <?php endif;?>
+      <style>
+        .thumbnail-list-con{
+          padding:0;
+          list-style:none;
+        }
+        .thumbnail-list-item-con{
+          display:flex;
+          
+        }
+        .item-title{
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 18px;
+          margin: 0 0 10px 0;
+          word-wrap: break-word;
+          font-family: 'Roboto', sans-serif;
+          color: #111111 ;
+        }
+        .cat:hover{
+          color:#ff5062;
+        }
+        .item-date{
+          font-family: 'Open Sans', arial, sans-serif;
+          font-size: 12px;
+          line-height: 1;
+          margin:5px 0 0 0;
+          color:#aaa;
+        }
+        .item-title-date{
+          margin:0 0 0 20px;
+        }
+
+        
+      </style>
+      <ul class="thumbnail-list-con">
+        <?php 
+        
+          $args = array(
+            'posts_per_page'  => 3,
+            'post-type'     => 'post',
+            'order'         => 'DESC',
+            'category_name' => 'CAT',
+            'offset'        =>  1,
+          );
+          $the_query = new WP_Query( $args );
+          
+          if ( $the_query->have_posts() ):
+            while ( $the_query->have_posts() ) : $the_query->the_post();?>  
+              <li class="thumbnail-list-item-con mt-1">
+                <a href=<?php echo get_permalink();?>> 
+                  <?php the_post_thumbnail(array("custom_size",80,60));?>
+                </a>
+                <div class="item-title-date">
+                  <a href = '<?php get_permalink();?>' class="item-title cat" >
+                      <?php the_title();?>
+                  </a>
+                  <p class="item-date"><?php $publish_date = get_the_date('F j, Y');echo $publish_date;?> </p>
+                </div>
+              </li>       
+          <?php endwhile;endif;?>
+        </ul>
+    </div>
+    <div class="col-lg-4">
+      <div class="badge-line mb-5"style="width:100%;border-bottom: 2px solid <?php echo return_class_name('TISSNET'); ?>;">
+        <span class="badge badge-danger" style = 'background-color:<?php echo return_class_name('TISSNET'); ?>;border-color:<?php echo return_class_name('TISSNET'); ?>;'><?php  echo 'TISSNET';?></span>
+      </div>
+   
+
+      <?php 
+      
+        $args = array(
+          'post-type'     => 'post',
+          'order'         => 'DESC',
+          'category_name' => 'TISSNET',
+        );
+        $the_query = new WP_Query( $args );
+        
+        if ( $the_query->have_posts() ):
+          while ( $the_query->have_posts() ) : $the_query->the_post();
+          $post = get_post();
+
+          if ( current_theme_supports( 'post-thumbnails' ) && has_post_thumbnail( $post->ID ) ) {
+                  
+              $page_bg_image     = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
+              $page_bg_image_url = $page_bg_image[0]; // This returns just the URL of the image.
+
+          } else {
+              $page_bg_image_url = get_background_image();
+          }
+
+
+      ?>
+      <style >
+        .main-thumbnail-con{
+          display:flex;
+          flex-direction:column;
+          justify-content:flex-end;
+          color:#fff;
+          background-blend-mode: multiply;
+          background-color: rgba(0, 0, 0, 0.1);
+          position:relative;
+        }
+        .main-thumbnail-con h4{
+          font-family: 'Roboto', sans-serif;
+          font-weight:700;
+          font-size:17px;
+          z-index:9;
+          margin:1px 0;
+          word-wrap:break-word;
+        }
+        .main-thumbnail-author{
+          font-family: 'Open Sans', arial, sans-serif;
+          font-size: 13px;
+          font-weight:bold;
+        }
+        .main-thumbnail-date{
+          color: #aaa;
+          font-family: 'Open Sans', arial, sans-serif;
+          font-size: 11px;
+          line-height: 1;
+          font-weight:bold;
+        }
+        .main-thumbnail-desc-con{
+          background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+          position:absolute;
+          width:100%;
+          bottom:0;
+          z-index:9;
+          padding:10px 20px;
+        }
+
+
+      </style>
+      <a href = <?php echo get_permalink();?> title="<?php echo the_title()," [Latest Update]";?>">
+      <div class="main-thumbnail-con mb-2" style="height:20vh;background-image:url('<?php echo $page_bg_image_url; ?>');background-size:cover;">
+        <div class="main-thumbnail-desc-con">
+          <h4><?php echo the_title();?> <span>[Latest Update]</span></h4>
+          <span class="main-thumbnail-author"> <?php  the_author();?></span>
+          <span> - </span>
+          <span class="main-thumbnail-date"><?php $publish_date = get_the_date('F j, Y');echo $publish_date;?></span>
+        </div>    
+      </div>
+      </a>
+      
+     
+     <?php break; endwhile;?>
+      <?php endif;?>
+      <style>
+        .thumbnail-list-con{
+          padding:0;
+          list-style:none;
+        }
+        .thumbnail-list-item-con{
+          display:flex;
+         
+        }
+        .item-title{
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 18px;
+          margin: 0 0 10px 0;
+          word-wrap: break-word;
+          font-family: 'Roboto', sans-serif;
+          color: #111111 ;
+        }
+        .tissnet:hover{
+          color:#257002 ;
+        }
+        .item-date{
+          font-family: 'Open Sans', arial, sans-serif;
+          font-size: 12px;
+          line-height: 1;
+          margin:5px 0 0 0;
+          color:#aaa;
+        }
+        .item-title-date{
+          margin:0 0 0 20px;
+        }
+
+        
+      </style>
+      <ul class="thumbnail-list-con">
+        <?php 
+        
+          $args = array(
+            'posts_per_page'  => 3,
+            'post-type'     => 'post',
+            'order'         => 'DESC',
+            'category_name' => 'TISSNET',
+            'offset'        =>  1,
+          );
+          $the_query = new WP_Query( $args );
+          
+          if ( $the_query->have_posts() ):
+            while ( $the_query->have_posts() ) : $the_query->the_post();?>  
+              <li class="thumbnail-list-item-con mt-1">
+                <a href=<?php echo get_permalink();?>> 
+                  <?php the_post_thumbnail(array("custom_size",80,60));?>
+                </a>
+                <div class="item-title-date">
+                  <a href = '<?php get_permalink();?>' class="item-title tissnet" >
+                      <?php the_title();?>
+                  </a>
+                  <p class="item-date"><?php $publish_date = get_the_date('F j, Y');echo $publish_date;?> </p>
+                </div>
+              </li>       
+          <?php endwhile;endif;?>
+        </ul>
+    </div>
+    <div class="col-lg-4">
+      <div class="badge-line mb-5"style="width:100%;border-bottom: 2px solid <?php echo return_class_name('CMAT'); ?>;">
+        <span class="badge badge-danger" style = 'background-color:<?php echo return_class_name('CMAT'); ?>;border-color:<?php echo return_class_name('CMAT'); ?>;'><?php  echo 'CMAT';?></span>
+      </div>
+   
+
+      <?php 
+      
+        $args = array(
+          'post-type'     => 'post',
+          'order'         => 'DESC',
+          'category_name' => 'CMAT',
+        );
+        $the_query = new WP_Query( $args );
+        
+        if ( $the_query->have_posts() ):
+          while ( $the_query->have_posts() ) : $the_query->the_post();
+          $post = get_post();
+
+          if ( current_theme_supports( 'post-thumbnails' ) && has_post_thumbnail( $post->ID ) ) {
+                  
+              $page_bg_image     = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
+              $page_bg_image_url = $page_bg_image[0]; // This returns just the URL of the image.
+
+          } else {
+              $page_bg_image_url = get_background_image();
+          }
+
+
+      ?>
+      <style >
+        .main-thumbnail-con{
+          display:flex;
+          flex-direction:column;
+          justify-content:flex-end;
+          color:#fff;
+          background-blend-mode: multiply;
+          background-color: rgba(0, 0, 0, 0.1);
+          position:relative;
+        }
+        .main-thumbnail-con h4{
+          font-family: 'Roboto', sans-serif;
+          font-weight:700;
+          font-size:17px;
+          z-index:9;
+          margin:1px 0;
+          word-wrap:break-word;
+        }
+        .main-thumbnail-author{
+          font-family: 'Open Sans', arial, sans-serif;
+          font-size: 13px;
+          font-weight:bold;
+        }
+        .main-thumbnail-date{
+          color: #aaa;
+          font-family: 'Open Sans', arial, sans-serif;
+          font-size: 11px;
+          line-height: 1;
+          font-weight:bold;
+        }
+        .main-thumbnail-desc-con{
+          background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+          position:absolute;
+          width:100%;
+          bottom:0;
+          z-index:9;
+          padding:10px 20px;
+        }
+
+
+      </style>
+      <a href = <?php echo get_permalink();?> title="<?php echo the_title()," [Latest Update]";?>">
+      <div class="main-thumbnail-con mb-2" style="height:20vh;background-image:url('<?php echo $page_bg_image_url; ?>');background-size:cover;">
+        <div class="main-thumbnail-desc-con">
+          <h4><?php echo the_title();?> <span>[Latest Update]</span></h4>
+          <span class="main-thumbnail-author"> <?php  the_author();?></span>
+          <span> - </span>
+          <span class="main-thumbnail-date"><?php $publish_date = get_the_date('F j, Y');echo $publish_date;?></span>
+        </div>    
+      </div>
+      </a>
+      
+     
+     <?php break; endwhile;?>
+      <?php endif;?>
+      <style>
+        .thumbnail-list-con{
+          padding:0;
+          list-style:none;
+        }
+        .thumbnail-list-item-con{
+          display:flex;
+         
+        }
+        .item-title{
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 18px;
+          margin: 0 0 10px 0;
+          word-wrap: break-word;
+          font-family: 'Roboto', sans-serif;
+          color: #111111 ;
+        }
+        .cmat:hover{
+          color:#1e73be;
+        }
+        .item-date{
+          font-family: 'Open Sans', arial, sans-serif;
+          font-size: 12px;
+          line-height: 1;
+          margin:5px 0 0 0;
+          color:#aaa;
+        }
+        .item-title-date{
+          margin:0 0 0 20px;
+        }
+
+        
+      </style>
+      <ul class="thumbnail-list-con">
+        <?php 
+        
+          $args = array(
+            'posts_per_page'  => 3,
+            'post-type'     => 'post',
+            'order'         => 'DESC',
+            'category_name' => 'CMAT',
+            'offset'        =>  1,
+          );
+          $the_query = new WP_Query( $args );
+          
+          if ( $the_query->have_posts() ):
+            while ( $the_query->have_posts() ) : $the_query->the_post();?>  
+              <li class="thumbnail-list-item-con mt-1">
+                <a href=<?php echo get_permalink();?>> 
+                  <?php the_post_thumbnail(array("custom_size",80,60));?>
+                </a>
+                <div class="item-title-date">
+                  <a href = '<?php get_permalink();?>' class="item-title cmat" >
+                      <?php the_title();?>
+                  </a>
+                  <p class="item-date"><?php $publish_date = get_the_date('F j, Y');echo $publish_date;?> </p>
+                </div>
+              </li>       
+          <?php endwhile;endif;?>
+        </ul>
+    </div>
+  </div>
+  
+
+
+
+
+
+        <div class="row mt-5">
           <div class="col-lg-8">
     <?php
 
@@ -20,13 +460,13 @@
         $args = array(
           'post-type' => 'post',
           'posts_per_page' => 3,
-          'order' => 'ASC',
+          'order' => 'DESC',
           'paged' => $page,
         );
 
         $the_query = new WP_Query( $args );
 
-        // Loop Starts here
+        
 
         if ( $the_query->have_posts() ) :
             while ( $the_query->have_posts() ) : $the_query->the_post();?>
@@ -41,13 +481,13 @@
                 <div class="row">
                   <div class="col-xl-5" style="padding-left:15px;">
                     <?php the_post_thumbnail('medium');?>
-                    <!-- <img src="" alt="" class="img-fluid mb-4"> -->
+                   
                   </div>
-                  <!-- <div class="col-xl-2"></div> -->
+                  
                   <div class="col-xl-7" style="padding-left:30px;">
                     <h3 class="no-mt"><a href=<?php echo get_permalink();?> ><?php the_title();?></a></h3>
                     <p class="mb-4"><?php $excerpt = get_the_excerpt();
-                    // the_excerpt();
+                    
                     $excerpt = substr( $excerpt, 0, 160 );
                     $result = substr( $excerpt, 0, strrpos( $excerpt, ' ' ) );
                     echo $result;?></p>
@@ -55,7 +495,6 @@
                 </div>
                 <div class="row" style="align-items:center;">
                   <div class="col-lg-8">
-                    <!-- <img src="" alt="...." class="rounded-circle mr-1">  -->
                     by <a href="javascript:void(0)"><?php the_author();?></a>
                     <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-time mr-05 color-info"></i> <span class="color-medium-dark">
                       <?php 
