@@ -9,7 +9,24 @@ add_theme_support( 'title-tag' );
 
 // require get_template_directory() . '/inc/template-tags.php';
 
-
+function return_class_name($name){
+   $classname= "";
+    if ($name==="CAT"){
+        $classname = '#ed5565';
+        
+    }else if ($name==="XAT"){
+        $classname = '#1e73be';
+    }else if($name ==="SNAP"){
+        $classname = '#720925';
+    }
+    else if ($name === "CMAT"){
+        $classname = '#257002';
+    }
+    else if($name==="TISSNET"){
+        $classname = '#7c6c17';
+    }
+    return $classname;
+}
 
 function gt_get_post_view() {
     $count = get_post_meta( get_the_ID(), 'post_views_count', true );

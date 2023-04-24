@@ -12,10 +12,7 @@
           </div>
       </div> -->
         <div class="row">
-          
           <div class="col-lg-8">
-          
-          
     <?php
 
         $page = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
@@ -33,9 +30,11 @@
 
         if ( $the_query->have_posts() ) :
             while ( $the_query->have_posts() ) : $the_query->the_post();?>
-        <div class="badge-line"style="width:50%;border-bottom: 2px solid #f44336;">
-                  <span class="badge badge-danger"><?php $category = get_the_category();
-$firstCategory = $category[0]->cat_name; echo $firstCategory;?></span>
+                <?php $category = get_the_category();
+                $firstCategory = $category[0]->cat_name;?>
+        <div class="badge-line"style="width:50%;border-bottom: 2px solid <?php echo return_class_name($firstCategory); ?>;">
+
+                  <span class="badge badge-danger" style = 'background-color:<?php echo return_class_name($firstCategory); ?>;border-color:<?php echo return_class_name($firstCategory); ?>;'><?php  echo $firstCategory;?></span>
         </div>
         <article class="card wow  animation-delay-5 mb-4" style="visibility: visible;">
              <div class="card-body overflow-hidden overflow-hidden">
@@ -80,30 +79,25 @@ $firstCategory = $category[0]->cat_name; echo $firstCategory;?></span>
 
    <?php endwhile;
 
-$big = 999999999; // need an unlikely integer
-echo '<nav aria-label="Page navigation">';
-echo '<ul class="pagination pagination-plain">';
-echo paginate_links( array(
-	'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-	'format' => '?paged=%#%',
-	'current' => max( 1, get_query_var('paged') ),
-	'total' => $the_query->max_num_pages,
-  'show_all' => 'true',
-  'prev_text' => '<<',
-  'next_text'  => ">>",
-  'prev_next' => 'false',
-) );
-echo '</ul>';
-echo '</nav>';
-    wp_reset_postdata();
-endif;
-?>
-
-
-
-
-
-          </div>
+      $big = 999999999; // need an unlikely integer
+      echo '<nav aria-label="Page navigation">';
+      echo '<ul class="pagination pagination-plain">';
+      echo paginate_links( array(
+        'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+        'format' => '?paged=%#%',
+        'current' => max( 1, get_query_var('paged') ),
+        'total' => $the_query->max_num_pages,
+        'show_all' => 'true',
+        'prev_text' => '<<',
+        'next_text'  => ">>",
+        'prev_next' => 'false',
+      ) );
+      echo '</ul>';
+      echo '</nav>';
+          wp_reset_postdata();
+      endif;
+      ?>
+</div>
           <div class="col-lg-4">
             
             <div class="card card-primary animated  animation-delay-7">
@@ -212,102 +206,8 @@ wp_reset_postdata();
                     <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Less</a>
                   </div>
                 </div>
-              </div>
-             
+              </div> 
             </div>
-            
-            <!-- <div class="card card-success animated fadeInUp animation-delay-7">
-              <div class="card-header">
-                <h3 class="card-title"><i class="zmdi zmdi-play-circle-outline"></i> Feature Video</h3>
-              </div>
-              <div tabindex="0" class="plyr plyr--full-ui plyr--video plyr--vimeo plyr--fullscreen-enabled plyr--paused plyr--stopped plyr__poster-enabled">
-                <div class="plyr__controls">
-                  <button class="plyr__controls__item plyr__control" type="button" data-plyr="play" aria-label="Play, AMPLITUDE | NEW ZEALAND 4K">
-                    <svg class="icon--pressed" role="presentation" focusable="false">
-                      <use href="https://agmstudio.io/themes/material-style/2.4.4/blog-sidebar2.html#plyr-pause">
-
-                      </use>
-                    </svg>
-                    <svg class="icon--not-pressed" role="presentation" focusable="false">
-                      <use xlink:href="#plyr-play"></use>
-                    </svg>
-                    <span class="label--pressed plyr__sr-only">Pause</span>
-                    <span class="label--not-pressed plyr__sr-only">Play</span>
-                  </button><div class="plyr__controls__item plyr__progress__container">
-                    <div class="plyr__progress">
-                      <input data-plyr="seek" type="range" min="0" max="100" step="0.01" value="0" autocomplete="off" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="290" aria-valuenow="0" id="plyr-seek-5125" aria-valuetext="00:00 of 00:00" style="--value:0%;">
-                      <progress class="plyr__progress__buffer" min="0" max="100" value="0" role="progressbar" aria-hidden="true">% buffered</progress>
-                      <span class="plyr__tooltip">00:00</span>
-                    </div>
-                  </div>
-                  <div class="plyr__controls__item plyr__time--current plyr__time" aria-label="Current time">04:50</div>
-                  <div class="plyr__controls__item plyr__volume">
-                    <button type="button" class="plyr__control" data-plyr="mute">
-                      <svg class="icon--pressed" role="presentation" focusable="false">
-                        <use xlink:href="#plyr-muted"></use>
-                      </svg>
-                      <svg class="icon--not-pressed" role="presentation" focusable="false">
-                        <use xlink:href="#plyr-volume"></use>
-                      </svg>
-                      <span class="label--pressed plyr__sr-only">Unmute</span>
-                      <span class="label--not-pressed plyr__sr-only">Mute</span>
-                    </button>
-                    <input data-plyr="volume" type="range" min="0" max="1" step="0.05" value="1" autocomplete="off" role="slider" aria-label="Volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" id="plyr-volume-5125" aria-valuetext="100.0%" style="--value:100%;">
-                  </div>
-                  <button class="plyr__controls__item plyr__control" type="button" data-plyr="captions">
-                    <svg class="icon--pressed" role="presentation" focusable="false">
-                      <use xlink:href="#plyr-captions-on"></use></svg><svg class="icon--not-pressed" role="presentation" focusable="false">
-                        <use xlink:href="#plyr-captions-off"></use></svg><span class="label--pressed plyr__sr-only">Disable captions</span>
-                        <span class="label--not-pressed plyr__sr-only">Enable captions</span>
-                      </button>
-                      <div class="plyr__controls__item plyr__menu">
-                        <button aria-haspopup="true" aria-controls="plyr-settings-5125" aria-expanded="false" type="button" class="plyr__control" data-plyr="settings">
-                          <svg role="presentation" focusable="false">
-                            <use xlink:href="#plyr-settings"></use>
-                          </svg>
-                          <span class="plyr__sr-only">Settings</span>
-                        </button><div class="plyr__menu__container" id="plyr-settings-5125" hidden="">
-                          <div>
-                            <div id="plyr-settings-5125-home">
-                              <div role="menu">
-                                <button data-plyr="settings" type="button" class="plyr__control plyr__control--forward" role="menuitem" aria-haspopup="true" hidden="">
-                                <span>Captions<span class="plyr__menu__value">Disabled</span>
-                              </span>
-                            </button>
-                            <button data-plyr="settings" type="button" class="plyr__control plyr__control--forward" role="menuitem" aria-haspopup="true" hidden="">
-                              <span>Quality<span class="plyr__menu__value">undefined</span>
-                            </span>
-                          </button>
-                          <button data-plyr="settings" type="button" class="plyr__control plyr__control--forward" role="menuitem" aria-haspopup="true"><span>Speed<span class="plyr__menu__value">Normal</span></span>
-                        </button></div></div><div id="plyr-settings-5125-captions" hidden=""><button type="button" class="plyr__control plyr__control--back"><span aria-hidden="true">Captions</span>
-                        <span class="plyr__sr-only">Go back to previous menu</span>
-                      </button>
-                      <div role="menu"></div></div><div id="plyr-settings-5125-quality" hidden="">
-                        <button type="button" class="plyr__control plyr__control--back"><span aria-hidden="true">Quality</span>
-                        <span class="plyr__sr-only">Go back to previous menu</span></button><div role="menu"></div></div>
-                        <div id="plyr-settings-5125-speed" hidden=""><button type="button" class="plyr__control plyr__control--back"><span aria-hidden="true">Speed</span><span class="plyr__sr-only">Go back to previous menu</span>
-                      </button><div role="menu"><button data-plyr="speed" type="button" role="menuitemradio" class="plyr__control" aria-checked="false" value="0.5"><span>0.5×</span>
-                    </button>
-                    <button data-plyr="speed" type="button" role="menuitemradio" class="plyr__control" aria-checked="false" value="0.75"><span>0.75×</span>
-                  </button>
-                  <button data-plyr="speed" type="button" role="menuitemradio" class="plyr__control" aria-checked="true" value="1"><span>Normal</span>
-                </button>
-                <button data-plyr="speed" type="button" role="menuitemradio" class="plyr__control" aria-checked="false" value="1.25"><span>1.25×</span>
-              </button>
-              <button data-plyr="speed" type="button" role="menuitemradio" class="plyr__control" aria-checked="false" value="1.5"><span>1.5×</span>
-            </button><button data-plyr="speed" type="button" role="menuitemradio" class="plyr__control" aria-checked="false" value="1.75"><span>1.75×</span>
-          </button>
-          <button data-plyr="speed" type="button" role="menuitemradio" class="plyr__control" aria-checked="false" value="2"><span>2×</span></button></div></div></div></div></div><button class="plyr__controls__item plyr__control" type="button" data-plyr="pip"><svg role="presentation" focusable="false"><use xlink:href="#plyr-pip"></use></svg><span class="plyr__sr-only">PIP</span></button><button class="plyr__controls__item plyr__control" type="button" data-plyr="fullscreen"><svg class="icon--pressed" role="presentation" focusable="false"><use xlink:href="#plyr-exit-fullscreen"></use></svg><svg class="icon--not-pressed" role="presentation" focusable="false"><use xlink:href="#plyr-enter-fullscreen"></use></svg><span class="label--pressed plyr__sr-only">Exit fullscreen</span><span class="label--not-pressed plyr__sr-only">Enter fullscreen</span></button></div><div class="plyr__video-wrapper plyr__video-embed" style="padding-bottom: 56.25%;"><div class="plyr__video-embed__container" poster="https://i.vimeocdn.com/video/474665344-b514228044c18c79bd91c22930583ece299c0fd6e48569db958e066645cd1d42-d.jpg" style="transform: translateY(-38.2812%);"><iframe src="https://player.vimeo.com/video/94747106?loop=false&amp;autoplay=false&amp;muted=false&amp;gesture=media&amp;playsinline=true&amp;byline=false&amp;portrait=false&amp;title=false&amp;speed=true&amp;transparent=false" allowfullscreen="" allowtransparency="" allow="autoplay" title="Player for AMPLITUDE | NEW ZEALAND 4K" data-ready="true" tabindex="-1"></iframe></div><div class="plyr__poster" style="background-image: url(&quot;https://i.vimeocdn.com/video/474665344-b514228044c18c79bd91c22930583ece299c0fd6e48569db958e066645cd1d42-d.jpg&quot;);"></div></div><div class="plyr__captions"></div><button type="button" class="plyr__control plyr__control--overlaid" data-plyr="play" aria-label="Play, AMPLITUDE | NEW ZEALAND 4K"><svg role="presentation" focusable="false"><use xlink:href="#plyr-play"></use></svg><span class="plyr__sr-only">Play</span></button></div>
-
-            </div> -->
-            <!-- <div class="card card-primary animated fadeInUp animation-delay-7">
-              <div class="card-header">
-                <h3 class="card-title"><i class="zmdi zmdi-widgets"></i> Text Widget</h3>
-              </div>
-              <div class="card-body overflow-hidden">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat ipsam non eaque est architecto doloribus, labore nesciunt laudantium, ex id ea, cum facilis similique tenetur fugit nemo id minima possimus.</p>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>
