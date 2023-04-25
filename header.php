@@ -83,6 +83,84 @@
   }
 }
 </style>
+<style type="text/css">
+        .col-card{
+          padding:10px 15px;
+        }
+        .main-thumbnail-con{
+          display:flex;
+          flex-direction:column;
+          justify-content:flex-end;
+          color:#fff;
+          /* background-blend-mode: multiply;
+          background-color: rgba(0, 0, 0, 0.5); */
+          position:relative;
+        }
+        .main-thumbnail-con h4{
+          font-family: 'Roboto', sans-serif;
+          font-weight:700;
+          font-size:17px;
+          z-index:9;
+          margin:1px 0;
+          word-wrap:break-word;
+        }
+        .main-thumbnail-author{
+          font-family: 'Open Sans', arial, sans-serif;
+          font-size: 13px;
+          font-weight:bold;
+        }
+        .main-thumbnail-date{
+          color: #aaa;
+          font-family: 'Open Sans', arial, sans-serif;
+          font-size: 11px;
+          line-height: 1;
+          font-weight:bold;
+        }
+        .main-thumbnail-desc-con{
+          background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.9) 100%);
+          position:absolute;
+          width:100%;
+          bottom:0;
+          height:80%;
+          z-index:9;
+          padding:10px 20px;     
+          display:flex;
+          align-items:flex-end;
+        }
+        .sub-thumbnail-desc-con{
+          /* width:90%;
+          position:absolute;
+          bottom:3%; */
+
+        }
+        .thumbnail-list-con{
+          padding:0;
+          list-style:none;
+        }
+        .thumbnail-list-item-con{
+          display:flex;
+          
+        }
+        .item-title{
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 18px;
+          margin: 0 0 10px 0;
+          word-wrap: break-word;
+          font-family: 'Roboto', sans-serif;
+          color: #111111 ;
+        }
+        .item-date{
+          font-family: 'Open Sans', arial, sans-serif;
+          font-size: 12px;
+          line-height: 1;
+          margin:5px 0 0 0;
+          color:#aaa;
+        }
+        .item-title-date{
+          margin:0 0 0 20px;
+        }
+      </style>
 
 
     

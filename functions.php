@@ -9,6 +9,18 @@ add_theme_support( 'title-tag' );
 
 // require get_template_directory() . '/inc/template-tags.php';
 
+
+function return_category(){
+    // $arrays = array ("CAT","TISSNET","CMAT","XAT");
+    $post_cat = get_categories();
+    $new_array = array();
+    foreach($post_cat as $new_value){
+        $new_array[] = $new_value -> name;
+    }
+    
+    return $new_array;
+}
+
 function return_class_name($name){
    $classname= "";
     if ($name==="CAT"){
