@@ -15,15 +15,15 @@ get_header(); ?>
           <div class="card-body card-body-big">
           <nav aria-label="breadcrumb">
     <ol class="breadcrumb p-0">
-        <li class="breadcrumb-item"><a href="https://cracku.in/blog/" target="_blank">Home</a></li>
-        <li class="breadcrumb-item"><a href= <?php $category = get_the_category()[0]->cat_name; echo 'https://cracku.in/blog/category/' .strtolower($category);?>> <?php $category = get_the_category()[0]->cat_name; echo $category;?> </a></li>
+        <li class="breadcrumb-item"><a href="/blog/" target="_blank">Home</a></li>
+        <li class="breadcrumb-item"><a href= <?php $category = get_the_category()[0]->cat_name; echo '/category/' .strtolower($category);?>> <?php $category = get_the_category()[0]->cat_name; echo $category;?> </a></li>
         <li class="breadcrumb-item active" aria-current="page"> 
           <?php the_title();?>
         </li>
     </ol>
 </nav>
 <span class="badge badge-danger breadcrumb-item active">
-<a  href= <?php $category = get_the_category()[0]->cat_name; echo 'https://cracku.in/blog/category/' .strtolower($category);?> style="color:#fff;"> <?php $category = get_the_category();
+<a  href= <?php $category = get_the_category()[0]->cat_name; echo '/category/' .strtolower($category);?> style="color:#fff;"> <?php $category = get_the_category();
 $firstCategory = $category[0]->cat_name; echo $firstCategory;?></a>  
 </span>
 <!-- <a href="https://cracku.in/blog/category/cat/" class="btn btn-raised btn-danger">CAT</a> -->
@@ -33,7 +33,7 @@ $firstCategory = $category[0]->cat_name; echo $firstCategory;?></a>
               <div class="col-6">
               <span class="rounded-circle"> by <a href="javascript:void(0)">
               <?php the_post();?>
-          <?php the_author(); ?>
+              <?php the_author(); ?>
         
               </a> </span>
               

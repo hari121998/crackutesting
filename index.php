@@ -4,6 +4,20 @@
 <link rel="stylesheet" href='https://cracku.in/static/external/yt-lazy/yt-lazy.551e71f7135b.css'>
 
 <div class="container">
+  <?php 
+  $category_name ="";
+  // /\/category\/([a-zA-Z0-9-]+)\/page/
+    if(preg_match('/\/category\/([a-zA-Z0-9-]+)\/page/', $_SERVER['REQUEST_URI'], $matches)){
+      $category_name = $matches[1];
+    }
+    elseif(preg_match('/\/category\/(.*)\//', $_SERVER['REQUEST_URI'], $matches)){
+      $category_name = $matches[1];
+    }
+
+    $page = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
+    
+    if($page === 1 && ($category_name === null || $category_name ==="")):
+    ?>
   <div class="row mb-5">
     <div class="col-lg-4">
       <?php get_template_part( 'template-parts/widgets/posts-widget',null,array('category'	=> 'CAT','style'=>'primary'));?>
@@ -21,13 +35,12 @@
       <?php get_template_part( 'template-parts/widgets/posts-widget',null,array('category'	=> 'XAT','style'=>'dark'));?>
     </div>
   </div>
+  <?php endif;?>
+  
   <div class="row mt-5">
     <div class="col-lg-8">
-        <?php get_template_part( 'template-parts/widgets/recent-posts-widgets',null,array('category' =>'cmat','style'=>'royal','order'=>'DESC','posts_per_page'=>3));?> 
+        <?php get_template_part( 'template-parts/widgets/recent-posts-widgets',null,array('category' =>$category_name,'style'=>'primary','order'=>'DESC','posts_per_page'=>3));?> 
     </div>
-    <!-- <div class="col-lg-8">  -->
-      <!-- <?php get_template_part( 'template-parts/widgets/recent-posts-widgets',null,array('category' =>'','style'=>'primary','order'=>'DESC','posts_per_page'=>3));?>  -->
-    <!-- </div> -->
     
     <div class="col-lg-4">
             
