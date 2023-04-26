@@ -5,159 +5,31 @@
 
 <div class="container">
   <div class="row mb-5">
-    <?php $cat_array = return_category();
-      $cat_name = '';
-      foreach($cat_array as $value):
-        
-        $cat_name = $value;
-    ;?>
-
     <div class="col-lg-4">
-      <div class="badge-line"style="width:100%;border-bottom: 2px solid <?php echo return_class_name($cat_name); ?>;">
-        <span class="badge badge-danger" style = 'background-color:<?php echo return_class_name($cat_name); ?>;border-color:<?php echo return_class_name($cat_name); ?>;'><?php  echo $cat_name;?></span>
-      </div>
-      <div class="card col-card">
-        <?php 
-
-            $args = array(
-              'posts_per_page'  => 4,
-              'post-type'     => 'post',
-              'order'         => 'DESC',
-              'category_name' => $cat_name,
-              'offset'        =>  0,
-            );
-            $the_query = get_posts( $args );
-              
-            // $the_query->the_post();
-            foreach($the_query as $index => $post):
-              // Do something with the post object
-              if ($index===0): 
-                $post = get_post();
-                if ( current_theme_supports( 'post-thumbnails' ) && has_post_thumbnail( $post->ID ) ) {    
-                    $page_bg_image     = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
-                    $page_bg_image_url = $page_bg_image[0]; // This returns just the URL of the image.
-
-                } else {
-                    $page_bg_image_url = get_background_image();
-                }
-              ?>
-                <a href = <?php echo get_permalink();?> title="<?php echo the_title()," [Latest Update]";?>">
-                  <div class="main-thumbnail-con mb-2" style="height:20vh;background-image:url('<?php echo $page_bg_image_url; ?>');background-size:cover;">
-                    <div class="main-thumbnail-desc-con">
-                      <div class="sub-thumbnail-desc-con">
-                        <h4><?php echo the_title();?> <span>[Latest Update]</span></h4>
-                        <span class="main-thumbnail-author"> <?php  the_author();?></span>
-                        <span> - </span>
-                        <span class="main-thumbnail-date"><?php $publish_date = get_the_date('F j, Y');echo $publish_date;?></span>
-                      </div>
-                    </div>    
-                  </div>
-                </a>  
-                <?php else:?>  
-              <ul class="thumbnail-list-con">
-                <li class="thumbnail-list-item-con mt-1">
-                  <a href=<?php echo get_permalink();?>> 
-                    <?php the_post_thumbnail(array("custom_size",80,60));?>
-                  </a>
-                  <div class="item-title-date">
-                    <a class="item-title"  onmouseover="this.style.color='<?php echo return_class_name($cat_name);?>';" onmouseout="this.style.color='#111111';" href = <?php echo get_permalink();?> >
-                        <?php the_title();?>
-                    </a>
-                    <p class="item-date"><?php $publish_date = get_the_date('F j, Y');echo $publish_date;?> </p>
-                  </div>
-                </li>      
-            </ul>
-            <?php endif;?>
-            <?php endforeach;?>
-      </div>
-   
+      <?php get_template_part( 'template-parts/widgets/posts-widget',null,array('category'	=> 'CAT','style'=>'primary'));?>
     </div>
-    <?php endforeach;?>
-
+    <div class="col-lg-4">
+      <?php get_template_part( 'template-parts/widgets/posts-widget',null,array('category'	=> 'TISSNET','style'=>'warning'));?>
+    </div>
+    <div class="col-lg-4">
+      <?php get_template_part( 'template-parts/widgets/posts-widget',null,array('category'	=> 'CMAT','style'=>'royal'));?>
+    </div>
+    <div class="col-lg-4">
+      <?php get_template_part( 'template-parts/widgets/posts-widget',null,array('category'	=> 'SNAP','style'=>'info'));?>
+    </div>
+    <div class="col-lg-4">
+      <?php get_template_part( 'template-parts/widgets/posts-widget',null,array('category'	=> 'XAT','style'=>'dark'));?>
+    </div>
   </div>
-  
-
-
-
-
-        <div class="row mt-5">
-          <div class="col-lg-8">
-            <?php
-              $page = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
-              $args = array(
-                'post-type' => 'post',
-                'posts_per_page' => 3,
-                'order' => 'DESC',
-                'paged' => $page,
-              );
-              $the_query = new WP_Query( $args );
-              if ( $the_query->have_posts() ) :
-              while ( $the_query->have_posts() ) : $the_query->the_post();?>
-                <?php $category = get_the_category();
-                $firstCategory = $category[0]->cat_name;?>
-                <div class="badge-line"style="width:50%;border-bottom: 2px solid <?php echo return_class_name($firstCategory); ?>;">
-                  <span class="badge badge-danger" style = 'background-color:<?php echo return_class_name($firstCategory); ?>;border-color:<?php echo return_class_name($firstCategory); ?>;'><?php  echo $firstCategory;?></span>
-                </div>
-                <article class="card wow  animation-delay-5 mb-4" style="visibility: visible;">
-                    <div class="card-body overflow-hidden overflow-hidden">
-                        <div class="row">
-                          <div class="col-xl-5" style="padding-left:15px;">
-                            <?php the_post_thumbnail('medium');?>
-                          
-                          </div>
-                          
-                          <div class="col-xl-7" style="padding-left:30px;">
-                            <h3 class="no-mt"><a href=<?php echo get_permalink();?> ><?php the_title();?></a></h3>
-                            <p class="mb-4"><?php $excerpt = get_the_excerpt();
-                            
-                            $excerpt = substr( $excerpt, 0, 160 );
-                            $result = substr( $excerpt, 0, strrpos( $excerpt, ' ' ) );
-                            echo $result;?></p>
-                          </div>
-                        </div>
-                        <div class="row" style="align-items:center;">
-                          <div class="col-lg-8">
-                            by <a href="javascript:void(0)"><?php the_author();?></a>
-                            <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-time mr-05 color-info"></i> <span class="color-medium-dark">
-                              <?php 
-                                $publish_date = get_the_date('F j, Y');
-                                echo $publish_date;
-                              ?>
-                                </span>
-                              </span>
-                              <span class="ml-4"><i class="zmdi zmdi-eye"></i>
-                                  <?php gt_set_post_view(); ?>
-                                  <?= gt_get_post_view(); ?>
-                              </span>  
-                          </div>
-                          <div class="col-lg-4 text-right">
-                            <a href=<?php echo get_permalink();?> class="btn btn-primary btn-raised btn-block animate-icon">Read More <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
-                          </div>
-                        </div>
-                    </div>
-                </article>
-                <?php endwhile;
-
-                    $big = 999999999; // need an unlikely integer
-                    echo '<nav aria-label="Page navigation">';
-                    echo '<ul class="pagination pagination-plain">';
-                    echo paginate_links( array(
-                      'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-                      'format' => '?paged=%#%',
-                      'current' => max( 1, get_query_var('paged') ),
-                      'total' => $the_query->max_num_pages,
-                      'show_all' => 'true',
-                      'prev_text' => '<<',
-                      'next_text'  => ">>",
-                      'prev_next' => 'false',
-                    ) );
-                    echo '</ul>';
-                    echo '</nav>';
-                        wp_reset_postdata();
-                    endif;
-                    ?>
-                </div>
-          <div class="col-lg-4">
+  <div class="row mt-5">
+    <div class="col-lg-8">
+        <?php get_template_part( 'template-parts/widgets/recent-posts-widgets',null,array('category' =>'cmat','style'=>'royal','order'=>'DESC','posts_per_page'=>3));?> 
+    </div>
+    <!-- <div class="col-lg-8">  -->
+      <!-- <?php get_template_part( 'template-parts/widgets/recent-posts-widgets',null,array('category' =>'','style'=>'primary','order'=>'DESC','posts_per_page'=>3));?>  -->
+    <!-- </div> -->
+    
+    <div class="col-lg-4">
             
             <div class="card card-primary animated  animation-delay-7">
               <div class="card-header">
@@ -267,9 +139,9 @@
                 </div>
               </div> 
             </div>
+            </div>
           </div>
-        </div>
-      </div>
+  </div>
+</div>
 
-
-      <?php get_footer(); ?>
+<?php get_footer(); ?>

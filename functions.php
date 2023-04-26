@@ -20,6 +20,33 @@ function return_category(){
     
     return $new_array;
 }
+// function return_color($name){
+//     if ($name==='primary'){
+//         return '#0288d1';
+//     }else if($name === 'info'){
+//         return '#00bcd4';
+//     }
+//     else if ($name === 'danger'){
+//         return '#f44336';
+//     }
+//     else if($name === 'success'){
+//         return '#4caf50';
+//     }
+//     else if ($name === 'secondary'){
+//         return '#6c757d';
+//     }
+//     else if($name === 'dark'){
+//         return '#424242';
+//     }
+//     else if($name === 'light'){
+//         return '#9e9e9e';
+//     }else if($name==='warning'){
+//         return '#ff9800';
+//     }
+//     return '#9c27b0';
+// }
+
+
 
 function return_class_name($name){
    $classname= "";
