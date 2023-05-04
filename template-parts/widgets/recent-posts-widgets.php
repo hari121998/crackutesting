@@ -4,9 +4,7 @@
               $page_items = $args['posts_per_page'];
               $order = $args['order'];
 
-              // preg_match('/\/category\/(.*)\//', $_SERVER['REQUEST_URI'], $matches);
-              // $category_name = $matches[1];
-              // echo $category_name;
+             
               
 
               $page = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;

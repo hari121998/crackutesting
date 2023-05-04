@@ -31,7 +31,7 @@ $firstCategory = $category[0]->cat_name; echo $firstCategory;?></a>
             <h1 class="no-mt"><?php the_title(); ?></h1>
             <div class="row">
               <div class="col-6">
-              <span class="rounded-circle"> by <a href="javascript:void(0)">
+              <span class="rounded-circle"> by <a href="<?php $author_name = get_the_author(); echo '/author/'.$author_name; ?>">
               <?php the_post();?>
               <?php the_author(); ?>
         
@@ -54,7 +54,10 @@ echo $publish_date;
             </div>
             
             <img src="/media/15_Min_xYMevmx.png" alt="" class="img-fluid mb-4"/>
+            <div class="post-thumbnail-image">
             <?php the_post_thumbnail("medium_large");?>
+            </div>
+            
             <?php the_post_thumbnail_caption();?>
             
               <?php the_content();?>
@@ -64,12 +67,24 @@ echo $publish_date;
       
       <?php get_sidebar("right");?>
     </div>
- 
-  <h2>Related Articles</h2>   
-      <div class="multiple-items slick-initialized slick-slider slick-dotted">        
-            
-         
-      <div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 0px; transform: translate3d(0px, 0px, 0px);"></div></div><ul class="slick-dots" role="tablist"></ul></div>  
+      <div class="multiple-items slick-initialized slick-slider slick-dotted">
+        <div class="slick-list draggable">
+          <div class="slick-track" style="opacity: 1; width: 0px; transform: translate3d(0px, 0px, 0px);">
+          
+        </div>
+      </div>
+      <ul class="slick-dots" role="tablist">
+          
+      </ul>
+    </div> 
+    <div class="row">
+        <div class="col-lg-6"><a>Previous Post</a></div>
+        <div class="col-lg-6">
+        <a>Next Post</a>
+        </div>
+
+  </div> 
   </div>
+  
  
 <?php get_footer(); ?>

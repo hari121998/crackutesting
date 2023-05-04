@@ -173,4 +173,31 @@ nav ul.pagination {
   .item-title-date{
     margin:0 0 0 20px;
   }
+.post-thumbnail-image img{
+    max-width: 100%;
+}
+  /*-------------------------------------------------- author php -----------------------------------------------------------*/
+
+ .author-profile-con{
+    border: 1px solid #cbc1c1;
+    padding: 21px;
+    margin-bottom: 48px;
+    display: flex;
+    align-items: start;
+
+ }
+ .author-profile-con img{
+   margin-right: 10px;
+
+ }
+ .author-posts{
+    background-color: #000000;
+    padding: 3px 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin-left: 10px;
+ }
+ 
  

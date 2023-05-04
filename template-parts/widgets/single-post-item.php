@@ -2,6 +2,7 @@
                 $style = $args['style'];
 
                 $firstCategory = $category[0]->cat_name;?>
+                <?php $cat = get_query_var('category'); echo $cat;?>
                 <div class="badge-line badge-line-<?php echo $style;?>">
                   <span class="badge-style badge badge-<?php echo $style;?>"><?php  echo $firstCategory;?></span>
                 </div>
