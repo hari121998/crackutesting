@@ -176,6 +176,23 @@ nav ul.pagination {
 .post-thumbnail-image img{
     max-width: 100%;
 }
+.prev-post-container{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.prev-post-container .prev-post-thumbnail-con{
+    /* width: 50%; */
+    
+}
+.prev-post-container .prev-post-thumbnail-con img{
+    max-width:100%;
+}
+.prev-post-container .prev-post-content-con{
+    padding: 5px 15px;
+}
+
   /*-------------------------------------------------- author php -----------------------------------------------------------*/
 
  .author-profile-con{

@@ -57,14 +57,80 @@ echo $publish_date;
             <div class="post-thumbnail-image">
             <?php the_post_thumbnail("medium_large");?>
             </div>
-            
+
             <?php the_post_thumbnail_caption();?>
             
               <?php the_content();?>
           </div>
         </div>
-      </div>
-      
+        <div class="row">
+        <div class="col-lg-6">
+        <?php 
+              $prev_post = get_previous_post();
+              $prev_post_link = get_permalink($prev_post->ID);
+              $prev_thumbnail_url = get_the_post_thumbnail_url($prev_post->ID,'thumbnail');
+              $prev_post_title  = get_the_title($prev_post->ID);
+              $prev_post_date = get_the_date('F Y,j',$prev_post->ID)
+            ?>
+            <?php if(!empty($prev_post)):?>
+        <span class="badge badge-default">Previous Post</span>
+        <div class="card">
+          <div class="prev-post-container">
+          
+            <a href="<?php echo $prev_post_link;?>" class='prev-post-thumbnail-con'>
+              <img src="<?php echo $prev_thumbnail_url;?>" alt="thumbnail-image"/>
+            </a>
+            <div class="prev-post-content-con">
+              <a href="<?php echo $prev_post_link;?>">
+              <?php echo wp_trim_words( $prev_post_title, 5, '...' );
+                
+                ?>
+              </a>
+              <br/>
+              <span>
+                <?php echo $prev_post_date;?>
+              </span>
+            </div>
+          </div>
+          
+            </div>
+            <?php endif;?>
+        </div>
+        <div class="col-lg-6">
+          <?php 
+              $next_post = get_next_post();
+              $next_post_link = get_permalink($next_post->ID);
+              $next_thumbnail_url = get_the_post_thumbnail_url($next_post->ID,'thumbnail');
+              $next_post_title  = get_the_title($next_post->ID);
+              $next_post_date = get_the_date('F Y,j',$next_post->ID);
+              if(!empty($next_post)):
+            ?>
+            
+        <span class="badge badge-default">Next Post</span>
+        <div class="card">
+          <div class="prev-post-container next-post-container">
+          
+            <a href="<?php echo $next_post_link;?>" class='prev-post-thumbnail-con'>
+              <img src="<?php echo $next_thumbnail_url;?>" alt="thumbnail-image"/>
+            </a>
+            <div class="prev-post-content-con">
+              <a href="<?php echo $next_post_link;?>">
+                <?php echo wp_trim_words( $next_post_title, 5, '...' );
+                
+               ?>
+              </a>
+              <br/>
+              <span>
+                <?php echo $next_post_date;?>
+              </span>
+            </div>
+          </div>
+            </div>
+            <?php endif;?>
+        </div>
+        
+    </div> 
+      </div>  
       <?php get_sidebar("right");?>
     </div>
       <div class="multiple-items slick-initialized slick-slider slick-dotted">
@@ -75,15 +141,8 @@ echo $publish_date;
       </div>
       <ul class="slick-dots" role="tablist">
           
-      </ul>
+      </ul>  
     </div> 
-    <div class="row">
-        <div class="col-lg-6"><a>Previous Post</a></div>
-        <div class="col-lg-6">
-        <a>Next Post</a>
-        </div>
-
-  </div> 
   </div>
   
  
