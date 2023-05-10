@@ -11,7 +11,7 @@
 ?>
 <div class="container">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-9">
             <nav aria-label="breadcrumb">
             <ol class="breadcrumb p-0">
                 <li class="breadcrumb-item"><a href="/blog/" target="_blank">Home</a></li>
@@ -64,20 +64,8 @@
                     ?>
             </div>
         </div>
-        <div class="col-lg-4 side-bar-container">
-            <!-- <div>
-                <hr/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <h1>Hello Sidebar</h1>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <hr/>
-            </div> -->
+        <div class="col-lg-3 side-bar-container">
+            <?php get_sidebar("right");?>
         </div>
     </div>
 </div>

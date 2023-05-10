@@ -871,106 +871,17 @@ s0.parentNode.insertBefore(s1,s0);
 </div>
 
 <script type="text/javascript">
-  var selected_options = [];
-  var submiting = false
-    $('.report-question').click(function(){
-        question_id = $(this).attr('data-qid')
-        if ($(this).attr('data-lang') == 'en'){
-           $('.translation-option').removeClass('hidden') 
-        }
-        else{
-           $('.translation-option').addClass('hidden')   
-        }
-        $('#report-qid').val(question_id)
-        $('#Qreport').modal('show')
-    });
-
-
-    function SuggestOption(ele){
-      options_changed = true
-      value = parseInt($(ele).val())
-      if (selected_options.includes(value) && $(ele).hasClass('selected')){
-        selected_options = selected_options.filter(item => item !== value)
-        $(ele).removeClass('selected')
-        $(ele).children().each(function(){
-          $(this).addClass('hidden')
-        })
-      }
-      else{
-        selected_options.push(value)
-        $(ele).addClass('selected')
-        $(ele).children().each(function(){
-          $(this).removeClass('hidden')
-        })
-      }
-    }
-
-    function refreshOptions(){
-        selected_options = []
-        $('.option').each(function(){
-            $(this).removeClass('selected')
-            $(this).children().each(function(){
-                $(this).addClass('hidden')
-            })
-        })
-        options_changed = false
-    }
-
-    function QuestionReport(e){
-      e.preventDefault()
-      if(!submiting){
-        submiting = true
-        feedback = ($('#feedback').val()).trim()
-        if(feedback.length == 0 && selected_options.length == 0){
-          Swal.fire("Warning", "FeeedBack Cannot be Blank", "warning");
-          submiting = false;
-          return;
-        }
-        var $inputs = $('#report-form :input');
-        var form_data = {};
-        $inputs.each(function() {
-            form_data[this.name] = $(this).val();
-        });
-        form_data['report_options'] = selected_options
-        $.ajax({
-          'headers': { "X-CSRFToken": getCookie("csrftoken") },
-            type: "POST",
-            url: "/question/report",
-            'data' :  form_data,
-            crossDomain: true,
-            'success': function(data) {
-                if(data.success){
-                  Swal.fire('Thank You','Your review has been successfully submitted','success')
-                  $('#feedback').val('')
-                  $('#Qreport').modal('hide')
-                }
-                refreshOptions()
-                submiting = false     
-            },
-            'error':function(){
-              $('#Qreport').modal('hide')
-              Swal.fire('error','some error occured Please Try Again later','error')
-              submiting = false
-            }
-        });
-      }
-    }
+				var katex_options = {delimiters:[
+					{left: "$$", right: "$$", display: true},
+					{left: "$", right: "$", display: false}
+				],ignoredClasses:['no-mathjax']};
+        renderMathInElement(document.body,katex_options);
 </script>
-     
-
      <script type="text/javascript">var is_loggedin = false;</script>
-     
      <script src="https://accounts.google.com/gsi/client"></script>
-     
      <script src='https://cracku.in/static/assets/js/logout.f08d9114c893.js'></script>
     <script src='https://cracku.in/static/assets/js/cracku.4d6d454b6d26.js'></script>
-
     <script src='https://cracku.in/static/assets/js/app.min.1e4adc734fed.js'></script>
-
-    
-    <script src='https://cracku.in/static/js/plugins/jsrender.min.4861a47a841d.js'></script>
-
-
     <script src='https://cracku.in/static/external/sweetalert2/dist/sweetalert2.min.0ad7b6714c6c.js' async defer></script>
 
     <script>
@@ -989,7 +900,6 @@ s0.parentNode.insertBefore(s1,s0);
      });
      
      
-     
       $(document).ready(function () {
         $(document).bind('copy paste', function (e) {
            e.preventDefault();
@@ -1003,104 +913,5 @@ s0.parentNode.insertBefore(s1,s0);
 
     </script>
      
-    
-
-
-<script>
- 
-    var startTime = '09:00:00';
-    var endTime = '18:00:00';
-
-    currentDate = new Date()   
-
-    startDate = new Date(currentDate.getTime());
-    startDate.setHours(startTime.split(":")[0]);
-    startDate.setMinutes(startTime.split(":")[1]);
-    startDate.setSeconds(startTime.split(":")[2]);
-
-    endDate = new Date(currentDate.getTime());
-    endDate.setHours(endTime.split(":")[0]);
-    endDate.setMinutes(endTime.split(":")[1]);
-    endDate.setSeconds(endTime.split(":")[2]);
-
-    valid = startDate < currentDate && endDate > currentDate
-
-    if (valid != true){
-      $('.timming').addClass('hidden')
-    }
-    
-
-    
-
-          var currentDate = new Date(new Date(). getTime() + 24 * 60 * 60 * 1000);
-          var day = currentDate. getDate()
-          var month = currentDate. getMonth() + 1.
-          var year = currentDate. getFullYear()
-          todayDate = year + '/' + month + '/' + day
-          $("#ms-countdown").countdown(todayDate,
-         
-        function(l){
-        $(this).html(l.strftime('<ul class="coming-date coming-date-black"><li>%D <span>Days</span></li><li class="colon">:</li><li>%H <span>Hours</span></li><li class="colon">:</li><li>%M <span>Minutes</span></li><li class="colon">:</li><li>%S <span>Seconds</span></li></ul>'))})
-        $("#sticky-enroll").hide();
-        $(window).scroll(function() {
-            if($(window).scrollTop() > 1000) { //scrolled past the other div?
-                $("#sticky-enroll").show(); //reached the desired point -- show div
-            }
-            else{
-                $("#sticky-enroll").hide(); //else above the desired point -- hide div
-            }
-        });
-
-        offer_date = "2022/12/01"
-
-        $("#ms-countdown-upgrade").countdown(offer_date,
-         
-         function(l){
-         $(this).html(l.strftime('<ul class="coming-date coming-date-black"><li>%D <span>Days</span></li><li class="colon">:</li><li>%H <span>Hours</span></li><li class="colon">:</li><li>%M <span>Minutes</span></li><li class="colon">:</li><li>%S <span>Seconds</span></li></ul>'))})
-         $("#sticky-enroll").hide();
-         $(window).scroll(function() {
-             if($(window).scrollTop() > 1000) { //scrolled past the other div?
-                 $("#sticky-enroll").show(); //reached the desired point -- show div
-             }
-             else{
-                 $("#sticky-enroll").hide(); //else above the desired point -- hide div
-             }
-         });
-
-
-
-
-    $('#rightside-btn').click(function(){
-        $('#razor-hidden-btn').trigger('click')
-    })
-   $('.extend').click(function(e){
-    e.preventDefault();
-    var btn = $(this);
-    btn.addClass('disabled');
-    $.ajax({
-        'headers': { "X-CSRFToken": getCookie("csrftoken") },
-        type: 'POST',
-        contentType: "application/json; charset=utf-8",
-        url: '',   
-        dataType: "json",
-        'success' : function(response) {
-            btn.removeClass('disabled');
-            //$('#razor-hidden-btn').attr('data-urlid', response.url_id);
-            //$('#razor-hidden-btn').trigger('click')
-            window.location.href = decodeURIComponent(response.payment_url)
-         },
-         'error' : function(response) {
-            btn.removeClass('disabled');
-         }
-     });
-
-   })
-
-
-</script>
-
-<script src='https://cracku.in/static/external/yt-lazy/yt-lazy.debadf64f2ec.js'></script>
-
-
   </body>
 </html>

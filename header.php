@@ -2,7 +2,7 @@
 <html lang="en"> 
   <head>
     <link rel="stylesheet" href=<?php echo get_stylesheet_uri();?> />
-    <link rel="stylesheet" href = "style.css"/>
+    <!-- <link rel="stylesheet" href = "style.css"/> -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,11 +14,17 @@
     
        
     <?php wp_head();?>
-        
+    <!-- Katex Options -->
+    <link rel="stylesheet" href='https://cracku.in/static/assets/plugins/katex/katex.min.50a5301fd703.css' >
+    <script src='https://cracku.in/static/assets/plugins/katex/katex.min.c158c9e823b6.js'></script>
+    <script src='https://cracku.in/static/assets/plugins/katex/contrib/auto-render.9984673e0d1e.js'></script>
+   
+
+    <!-- <link rel="stylesheet" href='katex.min.css' >
+      <script src="katex.min.js"></script>
+      <script src="auto-render.min.js"></script>      -->
+      
     
-        
-
-
 
     <link rel="manifest" href="/manifest.json">
 
@@ -42,7 +48,6 @@
       gtag('js', new Date());
       gtag('config', 'AW-702721535');
     </script>
-    
     
     
     
@@ -138,7 +143,7 @@ html{
   </head>
 
   <body >
-    
+  
     <div id='overlay' class="yolo hidden">
     <center><font id="overlay-signin" color="white" size="8">Sign in</font></center>
     <center><font id="overlay-text" color="white" size="4

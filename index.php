@@ -42,6 +42,9 @@
               
               <div class="row mt-5">
                 <div class="col-lg-8">
+                <div class="badge-line badge-line-primary mb-4">
+                  <span class="badge-style badge badge-primary">Latest Articles</span>
+                </div>                
                     <?php get_template_part( 'template-parts/widgets/recent-posts-widgets',null,array('category' =>$category_name,'style'=>'primary','order'=>'DESC','posts_per_page'=>3));?> 
                 </div>
                 
