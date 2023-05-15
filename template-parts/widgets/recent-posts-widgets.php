@@ -3,6 +3,7 @@
               $style = $args['style'];
               $page_items = $args['posts_per_page'];
               $order = $args['order'];
+              $tag_name = $args['tag'];
 
              
               
@@ -15,6 +16,7 @@
                 'order' => $order,
                 'paged' => $page,
                 'category_name' => $cat_name,
+                'tag' => $tag_name,
                 
               );
               $the_query = new WP_Query( $args );

@@ -211,3 +211,30 @@ nav ul.pagination {
  .w3eden img{
     margin: 10px 25%;
  }
+
+ /* <------------------------posts - tags ------------------------------------> */
+.post-tag-container{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.post-tag-container span{
+    background-color:  #222222;
+    color: #fff;
+    padding:5px 8px;
+    margin:0 5px;
+}
+.post-tag-container li a{
+    border: 1px solid #ededed;
+    float: left;
+    padding: 5px 8px;
+    margin-left:  5px;
+    text-transform: uppercase;
+}
+.post-tag-container a:hover{
+    color: #fff !important;
+    background-color: #0288d1 !important;
+    border: 1px solid #0288d1;
+}

@@ -6,14 +6,14 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb p-0">
                     <li class="breadcrumb-item"><a href="/blog/" target="_blank">Home</a></li>
-                    <li class="breadcrumb-item"><a href= <?php $category = get_the_category()[0]->cat_name; echo '/category/' .strtolower($category);?>> <?php $category = get_the_category()[0]->cat_name; echo $category;?> </a></li>
+                    <li class="breadcrumb-item"><a href= <?php $category = get_the_category()[0]->cat_name; echo '/blog/category/' .strtolower($category);?>> <?php $category = get_the_category()[0]->cat_name; echo $category;?> </a></li>
                     <li class="breadcrumb-item active" aria-current="page"> 
                       <?php the_title();?>
                     </li>
                 </ol>
             </nav>
 <span class="badge badge-danger breadcrumb-item active">
-<a  href= <?php $category = get_the_category()[0]->cat_name; echo '/category/' .strtolower($category);?> style="color:#fff;"> <?php $category = get_the_category();
+<a  href= <?php $category = get_the_category()[0]->cat_name; echo '/blog/category/' .strtolower($category);?> style="color:#fff;"> <?php $category = get_the_category();
 $firstCategory = $category[0]->cat_name; echo $firstCategory;?></a>  
 </span>
 <!-- <a href="https://cracku.in/blog/category/cat/" class="btn btn-raised btn-danger">CAT</a> -->
@@ -52,8 +52,28 @@ echo $publish_date;
             
               <?php the_content();?>
           </div>
+          <?php
+            $post_tags = get_the_tags();
+
+              if ( $post_tags ) :?>
+              
+              
+          
+            <ul class="p-4 post-tag-container">
+              <li><span>TAGS</span></li>
+              <?php foreach($post_tags as $tag) :?>
+                <?php $tag_modified = str_replace( ' ', '-', $tag->name );?>
+                
+              <li>
+                  <a href="<?php echo '/blog/tag/'.$tag_modified;?>" class="btn btn-primary"><?php echo $tag->name;?> </a>
+              </li>
+              <?php endforeach;?>
+            </ul>
+            
+          <?php endif;?>
         </div>
         <div class="row">
+        
         <div class="col-lg-6">
         <?php 
               $prev_post = get_previous_post();

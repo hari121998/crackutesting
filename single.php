@@ -17,7 +17,6 @@ $category_name="";
     }
     else{
       get_template_part('template-parts/widgets/posts-template');
-
     }
   }
   else{

@@ -6,20 +6,10 @@
               
             <div class="container">
               <?php 
-              $category_name ="";
-
-              // /\/category\/([a-zA-Z0-9-]+)\/page/
-                if(preg_match('/\/category\/([a-zA-Z0-9-]+)\/page/', $_SERVER['REQUEST_URI'], $matches)){
-                  $category_name = $matches[1];
-                  echo $category_name;
-                }
-                elseif(preg_match('/\/category\/(.*)\//', $_SERVER['REQUEST_URI'], $matches)){
-                  $category_name = $matches[1];
-                }
-
+              
                 $page = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
                 
-                if($page === 1 && ($category_name === null || $category_name ==="")):
+                if($page === 1 && ($tag_name === null || $tag_name ==="")):
                 ?>
               <div class="row mb-5">
                 <div class="col-lg-4">
@@ -42,14 +32,14 @@
               
               <div class="row mt-5">
                 <div class="col-lg-8">
-                <div class="badge-line badge-line-primary mb-4">
+                <!-- <div class="badge-line badge-line-primary mb-4">
                   <span class="badge-style badge badge-primary">Latest Articles</span>
-                </div>                
-                    <?php get_template_part( 'template-parts/widgets/recent-posts-widgets',null,array('category' =>$category_name,'style'=>'primary','order'=>'DESC','posts_per_page'=>3));?> 
+                </div>                 -->
+                    <?php get_template_part( 'template-parts/widgets/recent-posts-widgets',null,array('category' =>'','tag'=>'','style'=>'primary','order'=>'DESC','posts_per_page'=>3));?> 
                 </div>
                 
-                <div class="col-lg-4">
-                        
+                <div class="col-lg-4"> 
+
                         <div class="card card-primary animated  animation-delay-7">
                           <div class="card-header">
                             <h3 class="card-title"><i class="zmdi zmdi-apps"></i> Navigation</h3>
@@ -98,13 +88,14 @@
                                       <a href="<?php echo get_permalink();?>" class="media-heading"><?php the_title();?> </a>
                                       <div class="media-footer text-small">
                                         <span class="mr-1"><i class="zmdi zmdi-time color-info mr-05"></i> <?php $publish_date = get_the_date('F j, Y');
-                        echo $publish_date;?>  </span>
+                                            echo $publish_date;?>  
+                                        </span>
                                       </div>
                                     </div>
                                   </div>
                                   
                                   <?php endwhile;
-                        else:
+                                else:
 
                             _e( 'Sorry, no posts matched your criteria.', 'textdomain' );
                         endif; 

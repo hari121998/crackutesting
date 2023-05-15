@@ -1,33 +1,40 @@
-<?php 
-get_header();?>
-<div class="container">
-            <?php 
-              $category_name ="";
-                if(preg_match('/\/category\/([a-zA-Z0-9-]+)\/page/', $_SERVER['REQUEST_URI'], $matches)){
-                  $category_name = $matches[1];
-                  
-                }
-                elseif(preg_match('/\/category\/(.*)\//', $_SERVER['REQUEST_URI'], $matches)){
-                  $category_name = $matches[1];}
-                  
-                  ?>
-    <div class="row">
-        <div class="col-lg-12 mb-2">
-        <nav aria-label="breadcrumb">
+<?php get_header();
+
+    $tag_name ="";
+    if(preg_match('/\/tag\/([a-zA-Z0-9-]+)\/page/', $_SERVER['REQUEST_URI'], $matches)){
+    $tag_name = $matches[1];
+    
+    
+    }
+    elseif(preg_match('/\/tag\/(.*)\//', $_SERVER['REQUEST_URI'], $matches)){
+    $tag_name = $matches[1];
+    }
+    $tag_modified = str_replace( '-', ' ', $tag_name );
+     
+    ?>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+            <nav aria-label="breadcrumb">
             <ol class="breadcrumb p-0">
                 <li class="breadcrumb-item"><a href="/blog/" target="_blank">Home</a></li>
-                <li class="breadcrumb-item">Category</li>
+                <li class="breadcrumb-item">Tags</li>
                 <li class="breadcrumb-item active" aria-current="page"> 
-                    <?php echo $category_name?>
+                    <?php echo $tag_name;?>
                 </li>
             </ol>
             </nav>
-        </div>
-        <div class="col-lg-8">
-            <h1>Category: <?php echo $category_name ?></h1>
-            <?php get_template_part( 'template-parts/widgets/recent-posts-widgets',null,array('category' =>$category_name,'tag'=>'','style'=>'primary','order'=>'DESC','posts_per_page'=>3));?> 
-        </div>
-        <div class="col-lg-4">
+            </div>
+            <div class="col-lg-12">
+                <h1>Tag: <?php echo $tag_name;?> </h1>
+            </div>
+            <div class="col-lg-8">
+                
+                <?php get_template_part( 'template-parts/widgets/recent-posts-widgets',null,array('category' =>'','tag'=>$tag_name,'style'=>'primary','order'=>'DESC','posts_per_page'=>3));?> 
+                
+            </div>
+        
+            <div class="col-lg-4">
             <div class="card card-primary animated  animation-delay-7">
                 <div class="card-header">
                 <h3 class="card-title"><i class="zmdi zmdi-apps"></i> Navigation</h3>
@@ -138,9 +145,12 @@ get_header();?>
                 </div> 
             </div>
             </div>
+            </div>
         </div>
     </div>
-</div>
-
+   
 
 <?php get_footer();?>
+
+              
+              
